@@ -63,8 +63,8 @@ class TranslatorApp(App[None]):
     def _translate_text(self) -> None:
         original = self.query_one("#original_input", TextArea)
         translated = self.query_one("#translated_output", TextArea)
-        source = self.query_one("#source_language", Select[str]).value
-        target = self.query_one("#target_language", Select[str]).value
+        source = self.query_one("#source_language", Select).value
+        target = self.query_one("#target_language", Select).value
         source_code = source if isinstance(source, str) else "auto"
         target_code = target if isinstance(target, str) else "zh"
         original_text = original.text.strip()
