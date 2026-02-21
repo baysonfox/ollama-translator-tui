@@ -1,6 +1,6 @@
 from textual.app import App, ComposeResult
 from textual.containers import Container, Horizontal, Vertical
-from textual.widgets import Button, Header, Footer, Label, Select, TextArea
+from textual.widgets import Button, Footer, Header, Label, Select, TextArea
 
 
 LANGUAGE_OPTIONS: list[tuple[str, str]] = [
