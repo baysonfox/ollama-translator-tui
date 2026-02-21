@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ollama-translator-tui"
+version = "0.1.0"
+description = "A minimal translator TUI scaffold for Ollama TranslateGemma."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "textual>=0.60.0",
+]
+
+[project.scripts]
+translator-tui = "translator_tui.app:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["translator_tui*"]
