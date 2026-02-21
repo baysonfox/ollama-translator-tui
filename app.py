@@ -35,6 +35,8 @@ class TranslatorApp(App[None]):
                 with Vertical(classes="pane"):
                     yield Label("Original", classes="pane_title")
                     yield TextArea("", id="original_input")
+                    with Horizontal(id="original_actions"):
+                        yield Button("Clear", id="clear_original_button")
                 with Vertical(classes="pane"):
                     yield Label("Translated", classes="pane_title")
                     translated = TextArea("", id="translated_output")
@@ -57,6 +59,10 @@ class TranslatorApp(App[None]):
         yield Footer()
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
+        if event.button.id == "clear_original_button":
+            self.query_one("#original_input", TextArea).text = ""
+            return
+
         if event.button.id == "translate_button":
             self._translate_text()
 

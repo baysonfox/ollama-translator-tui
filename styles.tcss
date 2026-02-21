@@ -33,6 +33,16 @@ TextArea {
     border: round $surface;
 }
 
+#original_actions {
+    margin-top: 1;
+    width: 100%;
+    align-horizontal: right;
+}
+
+#clear_original_button {
+    width: 12;
+}
+
 #controls {
     margin-top: 1;
     align: center middle;
