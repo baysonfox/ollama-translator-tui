@@ -15,6 +15,14 @@ LANGUAGE_OPTIONS: list[tuple[str, str]] = [
     ("Korean", "ko"),
 ]
 
+LANGUAGE_NAMES: dict[str, str] = {
+    "auto": "Auto",
+    "zh": "Chinese",
+    "en": "English",
+    "ja": "Japanese",
+    "ko": "Korean",
+}
+
 
 class TranslatorApp(App[None]):
     CSS_PATH = "styles.tcss"
@@ -82,15 +90,23 @@ class TranslatorApp(App[None]):
         source_lang: str,
         target_lang: str,
     ) -> str:
-        source_prompt = (
-            "auto-detect" if source_lang == "auto" else f"language code '{source_lang}'"
+        source_code = "en" if source_lang == "auto" else source_lang
+        source_name = (
+            "English"
+            if source_lang == "auto"
+            else LANGUAGE_NAMES.get(source_lang, "English")
         )
+        target_name = LANGUAGE_NAMES.get(target_lang, "Chinese")
         prompt = (
-            "You are a translation engine. Translate the text exactly. "
-            "Return only the translated text.\n"
-            f"Source: {source_prompt}\n"
-            f"Target language code: '{target_lang}'\n\n"
-            f"Text:\n{text}"
+            f"You are a professional {source_name} ({source_code}) to "
+            f"{target_name} ({target_lang}) translator. Your goal is to "
+            "accurately convey the meaning and nuances of the original "
+            f"{source_name} text while adhering to {target_name} grammar, "
+            "vocabulary, and cultural sensitivities.\n"
+            f"Produce only the {target_name} translation, without any "
+            "additional explanations or commentary. Please translate the "
+            f"following {source_name} text into {target_name}:\n\n\n"
+            f"{text}"
         )
         payload = {
             "model": "translategemma:4b",
